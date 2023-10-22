@@ -2,9 +2,15 @@
 
 yum install nano wget epel-release -y
 
-yum install docker git -y
+yum install git yum-utils -y
 
-firewall-cmd --permanent --zone=public --add-port=80/tcp
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+yum update -y
+
+yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+firewall-cmd --permanent --zone=public --add-port=80/tcp --add-port=3306/tcp
 
 firewall-cmd --reload
 
@@ -27,3 +33,5 @@ docker ps
 docker exec osticket service apache2 start
 
 http://ip_address:80/
+
+

@@ -1,0 +1,21 @@
+yum install maridb mariadb-client mariadb-server -y
+
+systemctl start mariadb
+
+mysql_secure_installation # ENTER-y-YOU_PASSWORD-CONFIRM_YOU_PASSWORD-y-n-y-y
+
+mysql -u root -p1
+
+	CREATE USER 'user'@'%' IDENTIFIED BY 'YOU_PASSWORD';
+ 
+	GRANT ALL PRIVILEGES ON *.* TO 'user'@'%';
+ 
+	FLUSH PRIVILEGES;
+ 
+	CREATE DATABASE osticket DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+ 
+	exit
+ 
+firewall-cmd --permanent --zone=public --add-port=3306/tcp
+
+firewall-cmd --reload
